@@ -1,0 +1,4 @@
+#Sat Jul 29 12:21:22 PDT 2017
+base.0=/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9
+renamed.0=classes.dex
+file.0=/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_9/classes.dex

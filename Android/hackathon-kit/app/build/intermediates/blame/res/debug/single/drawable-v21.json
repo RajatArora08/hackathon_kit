@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/build/intermediates/res/merged/debug/drawable-v21/tab_bg.xml",
+        "source": "/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/src/main/res/drawable-v21/tab_bg.xml"
+    },
+    {
+        "merged": "/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/build/intermediates/res/merged/debug/drawable-v21/item_bg.xml",
+        "source": "/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/src/main/res/drawable-v21/item_bg.xml"
+    }
+]

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.weiqilab.hackathon.hackathonkit"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Always required on api < 21, needed to keep a wake lock while your job is running -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Required on api < 21 if you are using setRequiredNetworkType(int) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Required on all api levels if you are using setPersisted(true) -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:name="com.weiqilab.hackathon.hackathonkit.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityMain"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityTouchEvent"
+            android:label="@string/title_activity_sub" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.weiqilab.hackathon.hackathonkit.activities.ActivityMain" />
+        </activity>
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivitySlidingTabLayout"
+            android:label="@string/title_activity_activity_using_tab_library" >
+        </activity>
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityVectorDrawable"
+            android:label="@string/title_activity_vector_test" >
+        </activity>
+
+        <service
+            android:name="com.weiqilab.hackathon.hackathonkit.services.ServiceMoviesBoxOffice"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityDynamicTabs"
+            android:label="@string/title_activity_dynamic_tabs" >
+        </activity>
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityRecylerAnimators"
+            android:label="@string/title_activity_recycler_item_animations" >
+        </activity>
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityA"
+            android:label="@string/title_activity_activity_calling" >
+        </activity>
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityB"
+            android:label="@string/title_activity_activity_called" >
+        </activity>
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivitySharedA"
+            android:label="@string/title_activity_activity_shared" />
+        <activity
+            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivitySharedB"
+            android:label="@string/title_activity_activity_shared_b" />
+        <activity
+            android:name="android.support.v7.widget.TestActivity"
+            android:label="RecyclerViewTestActivity" />
+
+        <service android:name="me.tatarka.support.internal.job.JobServiceCompat" />
+        <service android:name="me.tatarka.support.internal.job.JobSchedulerService" />
+
+        <receiver
+            android:name="me.tatarka.support.internal.receivers.NetworkReceiver"
+            android:enabled="false" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="me.tatarka.support.internal.receivers.PowerReceiver"
+            android:enabled="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_BATTERY_LOW" />
+                <action android:name="android.intent.action.ACTION_BATTERY_OKAY" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="me.tatarka.support.server.job.controllers.PowerReceiver.ACTION_CHARGING_STABLE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="me.tatarka.support.internal.receivers.BootReceiver"
+            android:enabled="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="me.tatarka.support.internal.receivers.IdleReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_ON" />
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.DREAMING_STARTED" />
+                <action android:name="android.intent.action.DREAMING_STOPPED" />
+                <action android:name="me.tatarka.support.server.job.controllers.IdleReceiver.ACTION_TRIGGER_IDLE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="me.tatarka.support.internal.receivers.TimeReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="me.tatarka.support.jobscheduler.JOB_DEADLINE_EXPIRED" />
+                <action android:name="me.tatarka.support.jobscheduler.JOB_DELAY_EXPIRED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

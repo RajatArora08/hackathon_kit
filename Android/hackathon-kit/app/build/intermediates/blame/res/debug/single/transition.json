@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/build/intermediates/res/merged/debug/transition/content_transition_a.xml",
+        "source": "/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/src/main/res/transition/content_transition_a.xml"
+    },
+    {
+        "merged": "/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/build/intermediates/res/merged/debug/transition/shared_element_transition_a.xml",
+        "source": "/Users/qq/Documents/101 Hackathon/20170729/001 HackathonKit/001 Android/hackathon-kit/app/src/main/res/transition/shared_element_transition_a.xml"
+    }
+]

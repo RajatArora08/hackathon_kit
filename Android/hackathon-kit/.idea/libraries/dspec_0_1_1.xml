@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="dspec-0.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/ada03064504b45773152a0ff76ef4f75aa55c66d/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/ada03064504b45773152a0ff76ef4f75aa55c66d/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lucasr.dspec/dspec/0.1.1/c5825fc5c5c31cc9d9f67e341d26636738a8d8f7/dspec-0.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
