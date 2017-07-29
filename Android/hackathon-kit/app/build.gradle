@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -35,4 +38,7 @@ dependencies {
     compile 'com.daimajia.androidanimations:library:1.1.3@aar'
     compile 'com.pkmmte.view:circularimageview:1.1'
     compile 'com.android.support:gridlayout-v7:22.0.0'
+
+    // 1) add gradle library
+    compile 'io.rapid:rapid-sdk-android:1.0.3'
 }
