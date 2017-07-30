@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">HackathonKit</string>
+    <string name="app_name">MOTIV8</string>
     <string name="title_activity_main">HackathonKit</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -44,5 +44,8 @@
     <string name="title_activity_activity_shared">Shared A</string>
     <string name="title_activity_activity_shared_b">Shared B</string>
     <string name="action_shared_transitions">SharedElementsTransition</string>
+    <string name="startDate">Mon, Aug 7, 2017 7:00 AM</string>
+    <string name="endDate">Mon, Sep 4, 2017 8:00 AM</string>
+    <string name="running">Running in Golden State Park</string>
 
 </resources>

@@ -37,6 +37,15 @@ import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 import me.tatarka.support.job.JobInfo;
 import me.tatarka.support.job.JobScheduler;
+import android.databinding.ObservableArrayList;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+
+//import org.alfonz.adapter.SimpleDataBoundRecyclerAdapter;
+
+import io.rapid.RapidCollectionSubscription;
+//import rapid.io.rapidhackathon.base.BaseActivity;
+//import rapid.io.rapidhackathon.databinding.ActivityMainItemBinding;
 
 
 public class ActivityMain extends ActionBarActivity implements MaterialTabListener, View.OnClickListener {
@@ -48,7 +57,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     //int corresponding to our 2nd tab corresponding to the Fragment where upcoming movies are displayed
     public static final int TAB_UPCOMING = 2;
     //int corresponding to the number of tabs in our Activity
-    public static final int TAB_COUNT = 3;
+    public static final int TAB_COUNT = 2;
     //int corresponding to the id of our JobSchedulerService
     private static final int JOB_ID = 100;
     //tag associated with the FAB menu button that sorts by name
@@ -70,6 +79,19 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     private FloatingActionMenu mFABMenu;
     private FragmentDrawer mDrawerFragment;
 
+
+    //Rapid.io Hackathon
+    private ObservableArrayList<UserEntity> mItems = new ObservableArrayList<>();
+    @Nullable private RapidCollectionSubscription mSubscription;
+    private RecyclerView.Adapter mRapidAdapter;
+    public static final String SELF_USER_ID="SELF_USER_ID";
+    public static final String SELF_PICTURE="SELF_PICTURE";
+    public static final String RECEIPENT_USER_ID="RECEIPENT_USER_ID";
+    public static final String RECEIPENT_PICTURE="RECEIPENT_PICTURE";
+    public static final String CHAT_ID = "CHAT_ID";
+    public static final String SELF_USER_NAME = "SELF_USER_NAME";
+    public static final String RECEIPENT_USER_NAME = "RECEIPENT_USER_NAME";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +101,34 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         setupJob();
         setupDrawer();
         //animate the Toolbar when it comes into the picture
-        AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
+//        AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
+//      subscribeDataFromRapid();
+        Intent intent = new Intent(this, ActivityChat.class);
+        intent.putExtra(SELF_USER_ID, "00011");
+        intent.putExtra(SELF_PICTURE, "https://lh3.googleusercontent.com/-oTueqvCzT6Q/AAAAAAAAAAI/AAAAAAAAXBk/csB7XzK-un8/s96-c/photo.jpg");
+        intent.putExtra(RECEIPENT_USER_ID, "00014");
+        intent.putExtra(RECEIPENT_PICTURE, "00014");
+        intent.putExtra(CHAT_ID,"11101");
+        intent.putExtra(SELF_USER_NAME,"Rajat");
+        intent.putExtra(RECEIPENT_USER_NAME,"AJ");
+        startActivity(intent);
     }
+
+//    public void subscribeDataFromRapid() {
+//
+//        mSubscription = Rapid.getInstance().collection("tests", UserEntity.class)
+//                .subscribeWithListUpdates(new RapidCallback.CollectionUpdates<UserEntity>() {
+//                    @Override
+//                    public void onValueChanged(List<RapidDocument<UserEntity>> rapidDocuments, ListUpdate listUpdate) {
+//                        mItems.clear();
+//                        for(RapidDocument<UserEntity> rapidDocument : rapidDocuments) {
+//                            mItems.add(rapidDocument.getBody());
+//                        }
+//
+////                        listUpdate.dispatchUpdateTo(mRapidAdapter);
+//                    }
+//                });
+//    }
 
     private void setupDrawer() {
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
@@ -294,8 +342,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         int icons[] = {R.drawable.ic_action_search,
-                R.drawable.ic_action_trending,
-                R.drawable.ic_action_upcoming};
+                R.drawable.ic_action_trending};
 
         FragmentManager fragmentManager;
 
@@ -313,9 +360,6 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
                     break;
                 case TAB_HITS:
                     fragment = FragmentBoxOffice.newInstance("", "");
-                    break;
-                case TAB_UPCOMING:
-                    fragment = FragmentUpcoming.newInstance("", "");
                     break;
             }
             return fragment;
@@ -335,5 +379,6 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         private Drawable getIcon(int position) {
             return getResources().getDrawable(icons[position]);
         }
+
     }
 } 
