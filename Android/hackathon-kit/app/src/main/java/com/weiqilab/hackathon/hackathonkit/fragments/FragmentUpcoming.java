@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -129,6 +130,21 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
         View layout = inflater.inflate(R.layout.fragment_upcoming, container, false);
         mView = layout;
         setUpAdapter();
+        Button btn = (Button) layout.findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ActivityChat.class);
+                intent.putExtra(ActivityMain.SELF_USER_ID, "00011");
+                intent.putExtra(ActivityMain.SELF_PICTURE, "https://lh3.googleusercontent.com/-oTueqvCzT6Q/AAAAAAAAAAI/AAAAAAAAXBk/csB7XzK-un8/s96-c/photo.jpg (5kB) ");
+                intent.putExtra(ActivityMain.RECEIPENT_USER_ID, "00014");
+                intent.putExtra(ActivityMain.RECEIPENT_PICTURE, "00014");
+                intent.putExtra(ActivityMain.CHAT_ID,"11101");
+                intent.putExtra(ActivityMain.SELF_USER_NAME,"Rajat");
+                intent.putExtra(ActivityMain.RECEIPENT_USER_NAME,"AJ");
+                startActivity(intent);
+            }
+        });
         return layout;
     }
 
