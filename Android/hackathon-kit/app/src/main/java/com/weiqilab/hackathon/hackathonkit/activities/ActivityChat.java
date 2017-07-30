@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -70,6 +71,7 @@ public class ActivityChat extends AppCompatActivity implements DatePickerDialog.
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
         Intent intent = getIntent();
         mSelf_User_ID = intent.getStringExtra(ActivityMain.SELF_USER_ID);
         mSelf_Picture = intent.getStringExtra(ActivityMain.SELF_PICTURE);
@@ -143,6 +145,9 @@ public class ActivityChat extends AppCompatActivity implements DatePickerDialog.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ActivityGoals.class);
+                intent.putExtra("pic_1", mSelf_Picture);
+                intent.putExtra("pic_2", mReceipent_Picture);
+
                 startActivity(intent);
             }
         });
