@@ -40,10 +40,10 @@
         </activity>
         <activity
             android:name=".activities.ActivitySlidingTabLayout"
-            android:label="@string/title_activity_activity_using_tab_library"></activity>
+            android:label="@string/title_activity_activity_using_tab_library" />
         <activity
             android:name=".activities.ActivityVectorDrawable"
-            android:label="@string/title_activity_vector_test"></activity>
+            android:label="@string/title_activity_vector_test" />
 
         <service
             android:name=".services.ServiceMoviesBoxOffice"
@@ -52,23 +52,24 @@
 
         <activity
             android:name=".activities.ActivityDynamicTabs"
-            android:label="@string/title_activity_dynamic_tabs"></activity>
+            android:label="@string/title_activity_dynamic_tabs" />
         <activity
             android:name=".activities.ActivityRecylerAnimators"
-            android:label="@string/title_activity_recycler_item_animations"></activity>
+            android:label="@string/title_activity_recycler_item_animations" />
         <activity
             android:name=".activities.ActivityA"
-            android:label="@string/title_activity_activity_calling"></activity>
+            android:label="@string/title_activity_activity_calling" />
         <activity
             android:name=".activities.ActivityB"
-            android:label="@string/title_activity_activity_called"></activity>
+            android:label="@string/title_activity_activity_called" />
         <activity
             android:name=".activities.ActivitySharedA"
             android:label="@string/title_activity_activity_shared" />
         <activity
             android:name=".activities.ActivitySharedB"
             android:label="@string/title_activity_activity_shared_b" />
-        <activity android:name=".activities.ActivityChat"></activity>
+        <activity android:name=".activities.ActivityChat" />
+        <activity android:name=".activities.ActivityGoals"></activity>
     </application>
 
 </manifest>

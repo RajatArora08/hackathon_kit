@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,8 +19,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -27,6 +30,7 @@ import com.weiqilab.hackathon.hackathonkit.R;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +42,7 @@ import io.rapid.RapidCollectionSubscription;
 import io.rapid.RapidDocument;
 
 
-public class ActivityChat extends AppCompatActivity {
+public class ActivityChat extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private RapidCollectionSubscription mSubscription;
     private ArrayList<MessagesEntity> mItems = new ArrayList<MessagesEntity>();
@@ -53,7 +57,8 @@ public class ActivityChat extends AppCompatActivity {
     public RecyclerView mRecyclerView;
     public String mSelf_Name;
     public String mReceipent_Name;
-
+    private ImageButton mImageButton;
+    private boolean mAutoHighlight;
 
     public static final int MSG_LENGTH_LIMIT = 50;
     public static final String COLLECTION = "motiv8-chat-mockup-2";
@@ -71,7 +76,6 @@ public class ActivityChat extends AppCompatActivity {
         mChat_ID = intent.getStringExtra(ActivityMain.CHAT_ID);
         mSelf_Name = intent.getStringExtra(ActivityMain.SELF_USER_NAME);
         mReceipent_Name = intent.getStringExtra(ActivityMain.RECEIPENT_USER_NAME);
-
 
         setUpAdapter();
 
@@ -111,6 +115,36 @@ public class ActivityChat extends AppCompatActivity {
                 mMessageEditText.setText("");
             }
         });
+
+
+        mImageButton = (ImageButton) findViewById(R.id.trophyButton);
+        mImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+
+                DatePickerDialog dpd = com.borax12.materialdaterangepicker.date.DatePickerDialog.newInstance(
+                        ActivityChat.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                dpd.setAutoHighlight(mAutoHighlight);
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth,int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
+        String date = "You picked the following date: From- "+dayOfMonth+"/"+(++monthOfYear)+"/"+year+" To "+dayOfMonthEnd+"/"+(++monthOfYearEnd)+"/"+yearEnd;
+        Intent intent = new Intent(this, ActivityGoals.class);
+        intent.putExtra("date", date);
+        startActivity(intent);
     }
 
     private void sendMessage(MessagesEntity chatMessage) {
@@ -255,8 +289,6 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder>{
             mMessageTextView = (TextView) v.findViewById(R.id.messageTextView);
             mMessengerTextView = (TextView) v.findViewById(R.id.messengerTextView);
             mMesssageTime = (TextView) v.findViewById(R.id.messsageTime);
-
-
         }
     }
 }
