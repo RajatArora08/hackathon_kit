@@ -4,10 +4,25 @@
     android:layout_height="match_parent"
     tools:context="com.weiqilab.hackathon.hackathonkit.fragments.FragmentUpcoming">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listMovieUpcoming"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="Start Chat with James" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textVolleyError"
