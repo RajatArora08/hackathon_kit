@@ -57,7 +57,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     //int corresponding to our 2nd tab corresponding to the Fragment where upcoming movies are displayed
     public static final int TAB_UPCOMING = 2;
     //int corresponding to the number of tabs in our Activity
-    public static final int TAB_COUNT = 3;
+    public static final int TAB_COUNT = 2;
     //int corresponding to the id of our JobSchedulerService
     private static final int JOB_ID = 100;
     //tag associated with the FAB menu button that sorts by name
@@ -101,7 +101,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         setupJob();
         setupDrawer();
         //animate the Toolbar when it comes into the picture
-        AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
+//        AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
 //      subscribeDataFromRapid();
         Intent intent = new Intent(this, ActivityChat.class);
         intent.putExtra(SELF_USER_ID, "00011");
@@ -342,8 +342,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         int icons[] = {R.drawable.ic_action_search,
-                R.drawable.ic_action_trending,
-                R.drawable.ic_action_upcoming};
+                R.drawable.ic_action_trending};
 
         FragmentManager fragmentManager;
 
@@ -361,9 +360,6 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
                     break;
                 case TAB_HITS:
                     fragment = FragmentBoxOffice.newInstance("", "");
-                    break;
-                case TAB_UPCOMING:
-                    fragment = FragmentUpcoming.newInstance("", "");
                     break;
             }
             return fragment;

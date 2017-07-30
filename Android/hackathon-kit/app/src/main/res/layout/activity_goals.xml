@@ -1,11 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/container_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -19,21 +37,34 @@
         android:layout_marginTop="21dp"
         android:text="Start"
         android:textAppearance="@android:style/TextAppearance.Material" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        app:srcCompat="@drawable/ic_account_circle_black_36px"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        app:srcCompat="@drawable/ic_account_circle_black_36px"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_account_circle_black_36px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_account_circle_black_36px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"/>
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--app:srcCompat="@drawable/ic_account_circle_black_36px"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView2"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--app:srcCompat="@drawable/ic_account_circle_black_36px"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentEnd="true" />-->
 
     <ImageView
         android:id="@+id/imageView3"
@@ -137,4 +168,7 @@
         android:textAppearance="@android:style/TextAppearance.Material" />
 
 </RelativeLayout>
-    </android.support.v4.widget.DrawerLayout>
+    </LinearLayout>
+
+
+</android.support.v4.widget.DrawerLayout>
