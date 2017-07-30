@@ -18,12 +18,12 @@ public class ProfileEntity extends BaseObservable {
     public String mName;
 
     @SerializedName("picture")
-    public Uri mPicture;
+    public String mPicture;
 
     @SerializedName("city")
     public String mCity;
 
-    public ProfileEntity(String mUserId, String mName, Uri mPicture, String mCity) {
+    public ProfileEntity(String mUserId, String mName, String mPicture, String mCity) {
         this.mUserId = mUserId;
         this.mName = mName;
         this.mPicture = mPicture;
