@@ -19,7 +19,7 @@
     <RelativeLayout
         android:id="@+id/userinfo"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/movie_thumbnail_height"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/userthumbnail"
         android:background="#8698A7"
         android:alpha="0.8">
