@@ -1,8 +1,11 @@
 package com.weiqilab.hackathon.hackathonkit.fragments;
 
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +20,11 @@ import com.android.volley.ParseError;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.weiqilab.hackathon.hackathonkit.R;
+import com.weiqilab.hackathon.hackathonkit.activities.UserEntity;
 import com.weiqilab.hackathon.hackathonkit.adapters.AdapterMovies;
 import com.weiqilab.hackathon.hackathonkit.callbacks.UpcomingMoviesLoadedListener;
 import com.weiqilab.hackathon.hackathonkit.database.DBMovies;
@@ -29,6 +36,8 @@ import com.weiqilab.hackathon.hackathonkit.pojo.Movie;
 import com.weiqilab.hackathon.hackathonkit.task.TaskLoadUpcomingMovies;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -92,27 +101,7 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_upcoming, container, false);
-        mTextError = (TextView) layout.findViewById(R.id.textVolleyError);
-        mRecyclerMovies = (RecyclerView) layout.findViewById(R.id.listMovieUpcoming);
-        //set the layout manager before trying to display data
-        mRecyclerMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new AdapterMovies(getActivity());
-        mRecyclerMovies.setAdapter(mAdapter);
 
-        if (savedInstanceState != null) {
-            //if this fragment starts after a rotation or configuration change, load the existing movies from a parcelable
-            mListMovies = savedInstanceState.getParcelableArrayList(STATE_MOVIES);
-        } else {
-            //if this fragment starts for the first time, load the list of movies from a database
-            mListMovies = MyApplication.getWritableDatabase().readMovies(DBMovies.UPCOMING);
-            //if the database is empty, trigger an AsycnTask to download movie list from the web
-            if (mListMovies.isEmpty()) {
-                L.m("FragmentUpcoming: executing task from fragment");
-                new TaskLoadUpcomingMovies(this).execute();
-            }
-        }
-        //update your Adapter to containg the retrieved movies
-        mAdapter.setMovies(mListMovies);
         return layout;
     }
 
@@ -120,7 +109,6 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         //save the movie list to a parcelable prior to rotation or configuration change
-        outState.putParcelableArrayList(STATE_MOVIES, mListMovies);
     }
 
     private void handleVolleyError(VolleyError error) {
@@ -146,6 +134,93 @@ public class FragmentUpcoming extends Fragment implements SortListener, Upcoming
 
     @Override
     public void onUpcomingMoviesLoaded(ArrayList<Movie> listMovies) {
-        mAdapter.setMovies(listMovies);
+        //mAdapter.setMovies(listMovies);
     }
 }
+class CustomUserTwoAdapter extends RecyclerView.Adapter<CustomUserTwoAdapter.ViewHolder>{
+
+    public ArrayList<UserEntity> mDataSet;
+    public LayoutInflater mInflater;
+    public Context mContext;
+
+    public CustomUserTwoAdapter(ArrayList<UserEntity> dataSet, Context context){
+        this.mDataSet = dataSet;
+        mInflater = LayoutInflater.from(context);
+        mContext = context;
+
+    }
+
+    @Override
+    public CustomUserTwoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        // TODO inflate layout here
+        View v = mInflater.inflate(R.layout.custom_user_item, parent, false);
+        CustomUserTwoAdapter.ViewHolder vH = new CustomUserTwoAdapter.ViewHolder(v);
+        return vH;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+
+        // TODO assign layout values here
+        UserEntity me = mDataSet.get(position);
+        holder.mUserNameTextView.setText(me.mProfileEntity.mName);
+        holder.mUsercityTextView.setText(me.mProfileEntity.mCity);
+        holder.mUserinterestsTextView.setText(android.text.TextUtils.join(", ", me.mInterests));
+        displayPhotoURL(holder.mCircleImageView, me.mProfileEntity.mPicture, mContext);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+    // TODO display profile picture here.
+    public static void displayPhotoURL(final CircleImageView messengerImageView, String photoUrl, Context context) {
+        if (photoUrl == null) {
+            messengerImageView
+                    .setImageDrawable(ContextCompat
+                            .getDrawable(context,
+                                    R.drawable.ic_account_circle_black_36px));
+        } else {
+            SimpleTarget target = new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
+                    messengerImageView.setImageBitmap(bitmap);
+                }
+            };
+            Glide.with(context)
+                    .load(photoUrl)
+                    .asBitmap()
+                    .into(target);
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDataSet.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        // TODO create fields here for layout.
+        CircleImageView mCircleImageView;
+        TextView mUserNameTextView;
+        TextView mUsercityTextView;
+        TextView mUserinterestsTextView;
+
+        public ViewHolder(View v){
+            super(v);
+            mCircleImageView = (CircleImageView) v.findViewById(R.id.userthumbnail);
+            mUserNameTextView = (TextView) v.findViewById(R.id.username);
+            mUsercityTextView = (TextView) v.findViewById(R.id.usercity);
+            mUserinterestsTextView = (TextView) v.findViewById(R.id.userinterests);
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+    }
+}
+

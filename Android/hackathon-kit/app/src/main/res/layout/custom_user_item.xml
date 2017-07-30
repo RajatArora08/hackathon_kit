@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/size_byte"
+    android:paddingLeft="@dimen/size_word"
+    android:paddingRight="@dimen/size_word"
+    android:paddingTop="@dimen/size_byte"
+    android:orientation="horizontal"
+    >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userthumbnail"
+        android:layout_width="@dimen/movie_thumbnail_width"
+        android:layout_height="@dimen/movie_thumbnail_height"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_abstract"
+        android:background="#586A93"/>
+
+    <RelativeLayout
+        android:id="@+id/userinfo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/movie_thumbnail_height"
+        android:layout_toRightOf="@id/userthumbnail"
+        android:background="#8698A7"
+        android:alpha="0.8">
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:alpha="0.87"
+            android:gravity="left"
+            android:padding="@dimen/size_half_byte"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:text="James"/>
+
+        <TextView
+            android:id="@+id/usercity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username"
+            android:gravity="left"
+            android:layout_marginLeft="10dp"
+            android:alpha="0.87"
+            android:padding="@dimen/size_half_byte"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:text="San Francisco"/>
+
+        <TextView
+            android:id="@+id/userinterests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usercity"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="3dp"
+            android:gravity="left"
+            android:alpha="0.87"
+            android:padding="@dimen/size_half_byte"
+            android:textSize="12dp"
+            android:textColor="#ffffff"
+            android:text="Gym, Study"/>
+    </RelativeLayout>
+
+</LinearLayout>
