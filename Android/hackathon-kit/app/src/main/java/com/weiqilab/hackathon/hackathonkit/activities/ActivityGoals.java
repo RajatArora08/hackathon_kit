@@ -13,8 +13,8 @@ public class ActivityGoals extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals);
 
-        TextView dateView = (TextView) findViewById(R.id.dateView);
-        String date = (String) getIntent().getExtras().get("date");
-        dateView.setText(date);
+//        TextView dateView = (TextView) findViewById(R.id.dateView);
+//        String date = (String) getIntent().getExtras().get("date");
+//        dateView.setText(date);
     }
 }

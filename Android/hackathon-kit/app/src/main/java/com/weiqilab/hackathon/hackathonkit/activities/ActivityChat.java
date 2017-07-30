@@ -18,6 +18,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -59,6 +60,7 @@ public class ActivityChat extends AppCompatActivity implements DatePickerDialog.
     public String mReceipent_Name;
     private ImageButton mImageButton;
     private boolean mAutoHighlight;
+    private Button mGoalButton;
 
     public static final int MSG_LENGTH_LIMIT = 50;
     public static final String COLLECTION = "motiv8-chat-mockup-2";
@@ -117,8 +119,8 @@ public class ActivityChat extends AppCompatActivity implements DatePickerDialog.
         });
 
 
-        mImageButton = (ImageButton) findViewById(R.id.trophyButton);
-        mImageButton.setOnClickListener(new View.OnClickListener() {
+        mGoalButton = (Button) findViewById(R.id.goalButton);
+        mGoalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -136,15 +138,24 @@ public class ActivityChat extends AppCompatActivity implements DatePickerDialog.
             }
         });
 
+        mImageButton = (ImageButton) findViewById(R.id.trophyButton);
+        mImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), ActivityGoals.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth,int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-        String date = "You picked the following date: From- "+dayOfMonth+"/"+(++monthOfYear)+"/"+year+" To "+dayOfMonthEnd+"/"+(++monthOfYearEnd)+"/"+yearEnd;
-        Intent intent = new Intent(this, ActivityGoals.class);
-        intent.putExtra("date", date);
-        startActivity(intent);
+        String date = "My goal is: From- "+dayOfMonth+"/"+(++monthOfYear)+"/"+year+" To "+dayOfMonthEnd+"/"+(++monthOfYearEnd)+"/"+yearEnd;
+
+        MessagesEntity message = new MessagesEntity(mChat_ID, mSelf_User_ID, date, new Date().getTime());
+        sendMessage(message);
     }
 
     private void sendMessage(MessagesEntity chatMessage) {
