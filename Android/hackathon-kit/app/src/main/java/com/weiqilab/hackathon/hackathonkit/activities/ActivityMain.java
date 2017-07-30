@@ -114,6 +114,23 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         setupDrawer();
         //animate the Toolbar when it comes into the picture
         AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
+        subscribeDataFromRapid();
+    }
+
+    public void subscribeDataFromRapid() {
+
+        mSubscription = Rapid.getInstance().collection("tests", UserEntity.class)
+                .subscribeWithListUpdates(new RapidCallback.CollectionUpdates<UserEntity>() {
+                    @Override
+                    public void onValueChanged(List<RapidDocument<UserEntity>> rapidDocuments, ListUpdate listUpdate) {
+                        mItems.clear();
+                        for(RapidDocument<UserEntity> rapidDocument : rapidDocuments) {
+                            mItems.add(rapidDocument.getBody());
+                        }
+
+                        listUpdate.dispatchUpdateTo(mRapidAdapter);
+                    }
+                });
     }
 
     private void setupDrawer() {
@@ -370,20 +387,5 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
             return getResources().getDrawable(icons[position]);
         }
 
-        public void subscribeDataFromRapid() {
-
-            mSubscription = Rapid.getInstance().collection("tests", UserEntity.class)
-                    .subscribeWithListUpdates(new RapidCallback.CollectionUpdates<UserEntity>() {
-                        @Override
-                        public void onValueChanged(List<RapidDocument<UserEntity>> rapidDocuments, ListUpdate listUpdate) {
-                            mItems.clear();
-                            for(RapidDocument<UserEntity> rapidDocument : rapidDocuments) {
-                                mItems.add(rapidDocument.getBody());
-                            }
-
-                            listUpdate.dispatchUpdateTo(mRapidAdapter);
-                        }
-                    });
-        }
     }
 } 
