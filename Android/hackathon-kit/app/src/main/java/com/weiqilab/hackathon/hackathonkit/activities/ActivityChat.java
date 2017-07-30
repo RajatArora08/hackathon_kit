@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +36,6 @@ import io.rapid.Rapid;
 import io.rapid.RapidCallback;
 import io.rapid.RapidCollectionSubscription;
 import io.rapid.RapidDocument;
-import io.rapid.RapidError;
-import io.rapid.RapidFuture;
 
 
 public class ActivityChat extends AppCompatActivity {
@@ -54,6 +51,9 @@ public class ActivityChat extends AppCompatActivity {
     public EditText mMessageEditText;
     public FloatingActionButton mSendButton;
     public RecyclerView mRecyclerView;
+    public String mSelf_Name;
+    public String mReceipent_Name;
+
 
     public static final int MSG_LENGTH_LIMIT = 50;
     public static final String COLLECTION = "motiv8-chat-mockup-2";
@@ -69,6 +69,9 @@ public class ActivityChat extends AppCompatActivity {
         mReceipent_User_ID = intent.getStringExtra(ActivityMain.RECEIPENT_USER_ID);
         mReceipent_Picture = intent.getStringExtra(ActivityMain.RECEIPENT_PICTURE);
         mChat_ID = intent.getStringExtra(ActivityMain.CHAT_ID);
+        mSelf_Name = intent.getStringExtra(ActivityMain.SELF_USER_NAME);
+        mReceipent_Name = intent.getStringExtra(ActivityMain.RECEIPENT_USER_NAME);
+
 
         setUpAdapter();
 
@@ -145,7 +148,7 @@ public class ActivityChat extends AppCompatActivity {
 
     public void subscribeDataFromRapid() {
 
-        mSubscription = Rapid.getInstance().collection("motiv8-chat-mockup-2", MessagesEntity.class)
+        mSubscription = Rapid.getInstance().collection(COLLECTION, MessagesEntity.class)
                 .equalTo("chat-id",mChat_ID)
                 .orderBy("timestamp")
                 .subscribeWithListUpdates(new RapidCallback.CollectionUpdates<MessagesEntity>() {
@@ -206,6 +209,8 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder>{
         displayPhotoURL(holder.mCircleImageView,
                 me.mUserId.equalsIgnoreCase(mActivityChat.mSelf_User_ID) ? mActivityChat.mSelf_Picture
                 : mActivityChat.mReceipent_Picture , mContext);
+        holder.mMessengerTextView.setText(me.mUserId.equalsIgnoreCase(mActivityChat.mSelf_User_ID) ?
+                mActivityChat.mSelf_Name : mActivityChat.mReceipent_Name);
 
 
 
