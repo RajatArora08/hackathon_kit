@@ -32,38 +32,18 @@ import com.weiqilab.hackathon.hackathonkit.fragments.FragmentUpcoming;
 import com.weiqilab.hackathon.hackathonkit.logging.L;
 import com.weiqilab.hackathon.hackathonkit.services.ServiceMoviesBoxOffice;
 
-import java.util.List;
-
-import io.rapid.ListUpdate;
-import io.rapid.Rapid;
-import io.rapid.RapidCallback;
-import io.rapid.RapidDocument;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 import me.tatarka.support.job.JobInfo;
 import me.tatarka.support.job.JobScheduler;
 import android.databinding.ObservableArrayList;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 //import org.alfonz.adapter.SimpleDataBoundRecyclerAdapter;
 
-import java.util.List;
-
-import io.rapid.ListUpdate;
-import io.rapid.Rapid;
-import io.rapid.RapidCallback;
 import io.rapid.RapidCollectionSubscription;
-import io.rapid.RapidDocument;
-import io.rapid.RapidDocumentReference;
-import io.rapid.Sorting;
 //import rapid.io.rapidhackathon.base.BaseActivity;
 //import rapid.io.rapidhackathon.databinding.ActivityMainItemBinding;
 
@@ -99,10 +79,18 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     private FloatingActionMenu mFABMenu;
     private FragmentDrawer mDrawerFragment;
 
+
     //Rapid.io Hackathon
     private ObservableArrayList<UserEntity> mItems = new ObservableArrayList<>();
     @Nullable private RapidCollectionSubscription mSubscription;
     private RecyclerView.Adapter mRapidAdapter;
+    public static final String SELF_USER_ID="SELF_USER_ID";
+    public static final String SELF_PICTURE="SELF_PICTURE";
+    public static final String RECEIPENT_USER_ID="RECEIPENT_USER_ID";
+    public static final String RECEIPENT_PICTURE="RECEIPENT_PICTURE";
+    public static final String CHAT_ID = "CHAT_ID";
+    public static final String SELF_USER_NAME = "SELF_USER_NAME";
+    public static final String RECEIPENT_USER_NAME = "RECEIPENT_USER_NAME";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +102,33 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         setupDrawer();
         //animate the Toolbar when it comes into the picture
         AnimationUtils.animateToolbarDroppingDown(mContainerToolbar);
+//      subscribeDataFromRapid();
+        Intent intent = new Intent(this, ActivityChat.class);
+        intent.putExtra(SELF_USER_ID, "00011");
+        intent.putExtra(SELF_PICTURE, "https://lh3.googleusercontent.com/-oTueqvCzT6Q/AAAAAAAAAAI/AAAAAAAAXBk/csB7XzK-un8/s96-c/photo.jpg");
+        intent.putExtra(RECEIPENT_USER_ID, "00014");
+        intent.putExtra(RECEIPENT_PICTURE, "00014");
+        intent.putExtra(CHAT_ID,"11101");
+        intent.putExtra(SELF_USER_NAME,"Rajat");
+        intent.putExtra(RECEIPENT_USER_NAME,"AJ");
+        startActivity(intent);
     }
+
+//    public void subscribeDataFromRapid() {
+//
+//        mSubscription = Rapid.getInstance().collection("tests", UserEntity.class)
+//                .subscribeWithListUpdates(new RapidCallback.CollectionUpdates<UserEntity>() {
+//                    @Override
+//                    public void onValueChanged(List<RapidDocument<UserEntity>> rapidDocuments, ListUpdate listUpdate) {
+//                        mItems.clear();
+//                        for(RapidDocument<UserEntity> rapidDocument : rapidDocuments) {
+//                            mItems.add(rapidDocument.getBody());
+//                        }
+//
+////                        listUpdate.dispatchUpdateTo(mRapidAdapter);
+//                    }
+//                });
+//    }
 
     private void setupDrawer() {
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
@@ -370,20 +384,5 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
             return getResources().getDrawable(icons[position]);
         }
 
-        public void subscribeDataFromRapid() {
-
-            mSubscription = Rapid.getInstance().collection("tests", UserEntity.class)
-                    .subscribeWithListUpdates(new RapidCallback.CollectionUpdates<UserEntity>() {
-                        @Override
-                        public void onValueChanged(List<RapidDocument<UserEntity>> rapidDocuments, ListUpdate listUpdate) {
-                            mItems.clear();
-                            for(RapidDocument<UserEntity> rapidDocument : rapidDocuments) {
-                                mItems.add(rapidDocument.getBody());
-                            }
-
-                            listUpdate.dispatchUpdateTo(mRapidAdapter);
-                        }
-                    });
-        }
     }
 } 

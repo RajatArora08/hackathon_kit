@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.weiqilab.hackathon.hackathonkit" >
+    package="com.weiqilab.hackathon.hackathonkit">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Always required on api < 21, needed to keep a wake lock while your job is running -->
@@ -11,21 +11,20 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name="com.weiqilab.hackathon.hackathonkit.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
         <!-- 2) INITIALIZE RAPID.IO -->
         <meta-data
             android:name="io.rapid.apikey"
             android:value="NDA1OWE0MWo1b3AzYWY3LnJhcGlkLmlv" />
 
-
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityMain"
-            android:label="@string/title_activity_main" >
+            android:name=".activities.ActivityMain"
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,48 +32,44 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityTouchEvent"
-            android:label="@string/title_activity_sub" >
+            android:name=".activities.ActivityTouchEvent"
+            android:label="@string/title_activity_sub">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.weiqilab.hackathon.hackathonkit.activities.ActivityMain" />
         </activity>
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivitySlidingTabLayout"
-            android:label="@string/title_activity_activity_using_tab_library" >
-        </activity>
+            android:name=".activities.ActivitySlidingTabLayout"
+            android:label="@string/title_activity_activity_using_tab_library" />
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityVectorDrawable"
-            android:label="@string/title_activity_vector_test" >
-        </activity>
+            android:name=".activities.ActivityVectorDrawable"
+            android:label="@string/title_activity_vector_test" />
 
         <service
-            android:name="com.weiqilab.hackathon.hackathonkit.services.ServiceMoviesBoxOffice"
+            android:name=".services.ServiceMoviesBoxOffice"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityDynamicTabs"
-            android:label="@string/title_activity_dynamic_tabs" >
-        </activity>
+            android:name=".activities.ActivityDynamicTabs"
+            android:label="@string/title_activity_dynamic_tabs" />
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityRecylerAnimators"
-            android:label="@string/title_activity_recycler_item_animations" >
-        </activity>
+            android:name=".activities.ActivityRecylerAnimators"
+            android:label="@string/title_activity_recycler_item_animations" />
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityA"
-            android:label="@string/title_activity_activity_calling" >
-        </activity>
+            android:name=".activities.ActivityA"
+            android:label="@string/title_activity_activity_calling" />
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivityB"
-            android:label="@string/title_activity_activity_called" >
-        </activity>
+            android:name=".activities.ActivityB"
+            android:label="@string/title_activity_activity_called" />
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivitySharedA"
-            android:label="@string/title_activity_activity_shared"></activity>
+            android:name=".activities.ActivitySharedA"
+            android:label="@string/title_activity_activity_shared" />
         <activity
-            android:name="com.weiqilab.hackathon.hackathonkit.activities.ActivitySharedB"
-            android:label="@string/title_activity_activity_shared_b"></activity>
+            android:name=".activities.ActivitySharedB"
+            android:label="@string/title_activity_activity_shared_b" />
+        <activity android:name=".activities.ActivityChat" />
+        <activity android:name=".activities.ActivityGoals"></activity>
     </application>
 
 </manifest>
