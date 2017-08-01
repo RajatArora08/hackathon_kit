@@ -19,9 +19,7 @@ import android.view.ViewGroup;
 
 import com.weiqilab.hackathon.hackathonkit.R;
 import com.weiqilab.hackathon.hackathonkit.activities.ActivityMain;
-import com.weiqilab.hackathon.hackathonkit.adapters.AdapterDrawer;
 import com.weiqilab.hackathon.hackathonkit.MyApplication;
-import com.weiqilab.hackathon.hackathonkit.pojo.Information;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,32 +30,11 @@ import java.util.List;
  */
 public class FragmentDrawer extends Fragment {
 
-    /*
-    STEPS TO HANDLE THE RECYCLER CLICK
 
-    1 Create a class that EXTENDS RecylcerView.OnItemTouchListener
-
-    2 Create an interface inside that class that supports click and long click and indicates the View that was clicked and the position where it was clicked
-
-    3 Create a GestureDetector to detect ACTION_UP single tap and Long Press events
-
-    4 Return true from the singleTap to indicate your GestureDetector has consumed the event.
-
-    5 Find the childView containing the coordinates specified by the MotionEvent and if the childView is not null and the listener is not null either, fire a long click event
-
-    6 Use the onInterceptTouchEvent of your RecyclerView to check if the childView is not null, the listener is not null and the gesture detector consumed the touch event
-
-    7 if above condition holds true, fire the click event
-
-    8 return false from the onInterceptedTouchEvent to give a chance to the childViews of the RecyclerView to process touch events if any.
-
-    9 Add the onItemTouchListener object for our RecyclerView that uses our class created in step 1
-     */
     public static final String KEY_USER_LEARNED_DRAWER = "user_learned_drawer";
     private RecyclerView mRecyclerDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private AdapterDrawer mAdapter;
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
     private View mContainer;
@@ -66,21 +43,6 @@ public class FragmentDrawer extends Fragment {
     public FragmentDrawer() {
         // Required empty public constructor
     }
-
-    public List<Information> getData() {
-        //load only static data inside a drawer
-        List<Information> data = new ArrayList<>();
-        int[] icons = {R.drawable.ic_action_search_orange, R.drawable.ic_action_trending_orange, R.drawable.ic_action_upcoming_orange};
-        String[] titles = getResources().getStringArray(R.array.drawer_tabs);
-        for (int i = 0; i < titles.length; i++) {
-            Information information = new Information();
-            information.title = titles[i];
-            information.iconId = icons[i];
-            data.add(information);
-        }
-        return data;
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,8 +60,6 @@ public class FragmentDrawer extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         mRecyclerDrawer = (RecyclerView) view.findViewById(R.id.drawerList);
-        mAdapter = new AdapterDrawer(getActivity(), getData());
-        mRecyclerDrawer.setAdapter(mAdapter);
         mRecyclerDrawer.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerDrawer.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerDrawer, new ClickListener() {
             @Override
@@ -141,8 +101,8 @@ public class FragmentDrawer extends Fragment {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
-                ((ActivityMain) getActivity()).onDrawerSlide(slideOffset);
-                toolbar.setAlpha(1 - slideOffset / 2);
+//                ((ActivityMain) getActivity()).onDrawerSlide(slideOffset);
+//                toolbar.setAlpha(1 - slideOffset / 2);
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);

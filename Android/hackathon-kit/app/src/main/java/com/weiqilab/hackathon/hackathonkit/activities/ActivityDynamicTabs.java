@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,7 +25,7 @@ import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 
 
-public class ActivityDynamicTabs extends ActionBarActivity implements MaterialTabListener {
+public class ActivityDynamicTabs extends AppCompatActivity implements MaterialTabListener {
     
     private Toolbar mToolbar;
     private MaterialTabHost mTabHost;

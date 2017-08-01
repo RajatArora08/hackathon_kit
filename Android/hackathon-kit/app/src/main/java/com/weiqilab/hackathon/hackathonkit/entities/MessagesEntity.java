@@ -1,4 +1,4 @@
-package com.weiqilab.hackathon.hackathonkit.activities;
+package com.weiqilab.hackathon.hackathonkit.entities;
 
 import android.databinding.BaseObservable;
 import android.net.Uri;

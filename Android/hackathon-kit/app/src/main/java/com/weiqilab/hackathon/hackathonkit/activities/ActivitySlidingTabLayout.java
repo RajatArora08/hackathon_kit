@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -16,12 +16,11 @@ import android.view.MenuItem;
 
 import com.telly.mrvector.MrVector;
 import com.weiqilab.hackathon.hackathonkit.R;
-import com.weiqilab.hackathon.hackathonkit.fragments.FragmentDummy;
 import com.weiqilab.hackathon.hackathonkit.views.SlidingTabLayout;
 
 
 
-public class ActivitySlidingTabLayout extends ActionBarActivity {
+public class ActivitySlidingTabLayout extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private ViewPager mPager;
@@ -88,8 +87,7 @@ public class ActivitySlidingTabLayout extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            FragmentDummy fragmentDummy = FragmentDummy.getInstance(position);
-            return fragmentDummy;
+            return null;
         }
 
         @Override
