@@ -1,10 +1,8 @@
-package com.weiqilab.hackathon.hackathonkit.activities;
+package com.weiqilab.hackathon.hackathonkit.entities;
 
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 
 import com.google.gson.annotations.SerializedName;
-import com.weiqilab.hackathon.hackathonkit.BR;
 
 import java.util.List;
 

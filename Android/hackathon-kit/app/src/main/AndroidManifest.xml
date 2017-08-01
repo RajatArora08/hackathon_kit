@@ -32,23 +32,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.ActivityTouchEvent"
-            android:label="@string/title_activity_sub">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.weiqilab.hackathon.hackathonkit.activities.ActivityMain" />
-        </activity>
-        <activity
             android:name=".activities.ActivitySlidingTabLayout"
             android:label="@string/title_activity_activity_using_tab_library" />
-        <activity
-            android:name=".activities.ActivityVectorDrawable"
-            android:label="@string/title_activity_vector_test" />
-
-        <service
-            android:name=".services.ServiceMoviesBoxOffice"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity
             android:name=".activities.ActivityDynamicTabs"
@@ -56,18 +41,6 @@
         <activity
             android:name=".activities.ActivityRecylerAnimators"
             android:label="@string/title_activity_recycler_item_animations" />
-        <activity
-            android:name=".activities.ActivityA"
-            android:label="@string/title_activity_activity_calling" />
-        <activity
-            android:name=".activities.ActivityB"
-            android:label="@string/title_activity_activity_called" />
-        <activity
-            android:name=".activities.ActivitySharedA"
-            android:label="@string/title_activity_activity_shared" />
-        <activity
-            android:name=".activities.ActivitySharedB"
-            android:label="@string/title_activity_activity_shared_b" />
         <activity android:name=".activities.ActivityChat" />
         <activity android:name=".activities.ActivityGoals"></activity>
     </application>

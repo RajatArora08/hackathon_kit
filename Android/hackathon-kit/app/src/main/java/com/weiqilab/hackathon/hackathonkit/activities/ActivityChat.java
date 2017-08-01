@@ -1,42 +1,31 @@
 package com.weiqilab.hackathon.hackathonkit.activities;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.app.DialogFragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.weiqilab.hackathon.hackathonkit.R;
+import com.weiqilab.hackathon.hackathonkit.adapters.ChatAdapter;
+import com.weiqilab.hackathon.hackathonkit.entities.MessagesEntity;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import io.rapid.ListUpdate;
 import io.rapid.Rapid;
 import io.rapid.RapidCallback;
@@ -53,7 +42,7 @@ public class ActivityChat extends AppCompatActivity implements DatePickerDialog.
     public String mReceipent_User_ID;
     public String mReceipent_Picture;
     public String mChat_ID;
-    public CustomAdapter mAdapter;
+    public ChatAdapter mAdapter;
     public EditText mMessageEditText;
     public FloatingActionButton mSendButton;
     public RecyclerView mRecyclerView;
@@ -190,7 +179,7 @@ public class ActivityChat extends AppCompatActivity implements DatePickerDialog.
     }
 
     public void setUpAdapter(){
-        mAdapter = new CustomAdapter(mItems,this);
+        mAdapter = new ChatAdapter(mItems,this);
         mRecyclerView = (android.support.v7.widget.RecyclerView)findViewById(R.id.chatRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
@@ -216,95 +205,3 @@ public class ActivityChat extends AppCompatActivity implements DatePickerDialog.
 
 }
 
-class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder>{
-
-    public ArrayList<MessagesEntity> mDataSet;
-    public LayoutInflater mInflater;
-    public Context mContext;
-    public ActivityChat mActivityChat;
-
-    public CustomAdapter(ArrayList<MessagesEntity> dataSet, Context context){
-        this.mDataSet = dataSet;
-        mInflater = LayoutInflater.from(context);
-        mContext = context;
-        mActivityChat = (ActivityChat)context;
-
-    }
-
-    @Override
-    public CustomAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v;
-        if (viewType == 1)
-            v = mInflater.inflate(R.layout.item_message_me, parent, false);
-        else
-            v = mInflater.inflate(R.layout.item_message, parent, false);
-
-        CustomAdapter.ViewHolder vH = new CustomAdapter.ViewHolder(v);
-        return vH;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if(mActivityChat.mSelf_User_ID.equalsIgnoreCase(mDataSet.get(position).mUserId))
-            return 1;
-        else
-            return 2;
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        MessagesEntity me = mDataSet.get(position);
-        holder.mMesssageTime.setText((new Timestamp(me.mTimeStamp)).toString());
-        holder.mMessageTextView.setText(me.mMessage);
-        displayPhotoURL(holder.mCircleImageView,
-                me.mUserId.equalsIgnoreCase(mActivityChat.mSelf_User_ID) ? mActivityChat.mSelf_Picture
-                : mActivityChat.mReceipent_Picture , mContext);
-        holder.mMessengerTextView.setText(me.mUserId.equalsIgnoreCase(mActivityChat.mSelf_User_ID) ?
-                mActivityChat.mSelf_Name : mActivityChat.mReceipent_Name);
-
-
-
-    }
-
-    public static void displayPhotoURL(final CircleImageView messengerImageView, String photoUrl, Context context) {
-        if (photoUrl == null) {
-            messengerImageView
-                    .setImageDrawable(ContextCompat
-                            .getDrawable(context,
-                                    R.drawable.ic_account_circle_black_36px));
-        } else {
-            SimpleTarget target = new SimpleTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
-                    messengerImageView.setImageBitmap(bitmap);
-                }
-            };
-            Glide.with(context)
-                    .load(photoUrl)
-                    .asBitmap()
-                    .into(target);
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        return mDataSet.size();
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-
-        CircleImageView mCircleImageView;
-        TextView mMessageTextView;
-        TextView mMessengerTextView;
-        TextView mMesssageTime;
-
-
-        public ViewHolder(View v){
-            super(v);
-            mCircleImageView = (CircleImageView) v.findViewById(R.id.messengerImageView);
-            mMessageTextView = (TextView) v.findViewById(R.id.messageTextView);
-            mMessengerTextView = (TextView) v.findViewById(R.id.messengerTextView);
-            mMesssageTime = (TextView) v.findViewById(R.id.messsageTime);
-        }
-    }
-}
