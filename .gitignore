@@ -57,3 +57,5 @@ freeline_project_description.json
 # Additional ignores
 .idea/
 Android/.idea/
+.DS_Store
+
